@@ -9,14 +9,12 @@ w = (windowSize-1)/2;
 dispar = zeros(size(im1,1), size(im1,2));
 temp = zeros(n,c);
 
-for d = 0:maxDisp
-   index = 1:(n * (c - d));
-   temp(index) = (im1(index + n * d) - im2(index)).^2;
-   dispar(:,:,d+1) = conv2(temp, mask, 'same');
+for i = 0:maxDisp
+   index = 1:(n * (c - i));
+   tmp(index) = (im1(index + n * i) - im2(index)).^2;
+   dispar(:);
 end
 
-[~, idx] = min(dispar, [], 3);
-dispM = idx - 1;
 
 % for x = 1 : size(im1,2)
 %    for y = 1 : size(im1,1)
