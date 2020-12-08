@@ -8,7 +8,7 @@ load('rectify.mat', 'M1', 'M2', 'K1n', 'K2n', 'R1n', 'R2n', 't1n', 't2n');
 
 
 maxDisp = 20; 
-windowSize = 3;
+windowSize = 6;
 dispM = get_disparity(im1, im2, maxDisp, windowSize);
 % disp(mean(mean(dispM)));
 % --------------------  get depth map
@@ -45,10 +45,10 @@ rectImg1 = rectIL(1:640, size(im1,2)-40:end);
 % rectImg1 = imcrop(rectIL, bbL);
 % rectImg2 = imcrop(rectIR, bbR);
 
-figure;imshow(rectImg1); title("rectIL");
-figure;imshow(rectImg2); title("rectIR");
-disp(size(rectImg1));
-disp(size(rectImg2));
+% figure;imshow(rectImg1); title("rectIL");
+% figure;imshow(rectImg2); title("rectIR");
+% disp(size(rectImg1));
+% disp(size(rectImg2));
 dispM2 = get_disparity(rectImg1, rectImg2, maxDisp, windowSize);
 % disp(mean(mean(dispM)));
 % --------------------  get depth map
@@ -58,7 +58,7 @@ depthM2 = get_depth(dispM2, K1n, K2n, R1n, R2n, t1n, t2n);
 % disp(mean(mean(depthM)));
 % --------------------  Display
 
-figure; imagesc(dispM2.*(im1>40)); colormap(gray); axis image;
+figure; imagesc(dispM2.*(rectImg1>40)); colormap(gray); axis image;
 title("Disparity After Rectification");
-figure; imagesc(depthM2.*(im1>40)); colormap(gray); axis image;
+figure; imagesc(depthM2.*(rectImg1>40)); colormap(gray); axis image;
 title("Depth After Rectification");
