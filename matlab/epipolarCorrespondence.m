@@ -20,6 +20,9 @@ for i = 1:n
    x1 = round(pts1(i,1));
    y1 = round(pts1(i,2));
    min = 10000;
+   if y1 - w_size<=0 || y1+w_size > size(im1,1)
+      continue; 
+   end
    img1_wind =  im1(y1 - w_size:y1+w_size, x1-w_size:x1+w_size, :);
    for x2 = 1 + w_size: size(im2,2) - w_size
        y2 = round((epipolar_line(3) + epipolar_line(1) * x2) / (-epipolar_line(2)));

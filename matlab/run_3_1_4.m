@@ -26,17 +26,20 @@ P1 = [eye(3), zeros(3,1)];
 
 P2 = camera2(E);
 most_zeros =0;
-best_err = 0;
+best_err1 = 0;
+best_err2 = 0;
 correct_P = P1;
 best_pts3d = [];
 for i = 1:4
-   [pts3d, err] = triangulate(K1 * P1, pts1, K2 * P2(:,:,i), pts2);
-   disp(err);
+    curr_p = P2(:,:,i);
+   [pts3d, err1, err2] = triangulate(K1 * P1, pts1, K2 * curr_p, pts2);
+%    disp(err);
    num_zeros = sum(pts3d(:,3));
-   if num_zeros > most_zeros
+   if num_zeros > most_zeros && curr_p(3,3) > 0
       most_zeros = num_zeros;
-      correct_p = P2(:,:,i);
-      best_err = err;
+      correct_p = curr_p;
+      best_err1 = err1;
+      best_err2 = err2;
       best_pts3d = pts3d;
    end
 end
@@ -45,5 +48,8 @@ end
 % axis equal;
 
 
-disp("error from correct Projection matrix");
-disp(best_err);
+disp("seperate errors from correct Projection matrix");
+disp("error 1:");
+disp(best_err1);
+disp("error 2:");
+disp(best_err2);

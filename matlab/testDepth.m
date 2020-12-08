@@ -8,7 +8,7 @@ load('rectify.mat', 'M1', 'M2', 'K1n', 'K2n', 'R1n', 'R2n', 't1n', 't2n');
 
 
 maxDisp = 20; 
-windowSize = 6;
+windowSize = 4;
 dispM = get_disparity(im1, im2, maxDisp, windowSize);
 % disp(mean(mean(dispM)));
 % --------------------  get depth map

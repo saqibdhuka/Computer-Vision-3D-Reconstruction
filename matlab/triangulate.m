@@ -1,4 +1,4 @@
-function [pts3d, err] = triangulate(P1, pts1, P2, pts2 )
+function [pts3d, err1, err2] = triangulate(P1, pts1, P2, pts2 )
 % triangulate estimate the 3D positions of points from 2d correspondence
 %   Args:
 %       P1:     projection matrix with shape 3 x 4 for image 1
