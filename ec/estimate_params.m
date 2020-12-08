@@ -9,6 +9,9 @@ D = diag(sign(diag(K)));
 K = K * D;
 R = D * R;
 K = K / K(end,end);
+if det(R) < 0
+   R = -R; 
+end
 t = -R * c;
 
 %from https://www.uio.no/studier/emner/matnat/its/nedlagte-emner/UNIK4690/v17/forelesninger/lecture_5_2_pose_from_known_3d_points.pdf
